@@ -413,6 +413,17 @@ const App: React.FC = () => {
                 themeClasses={themeConfig}
               />
             </div>
+
+            <div className="mt-16 text-center">
+              <a
+                href="https://github.com/AKPAING3147?tab=repositories"
+                target="_blank"
+                rel="noreferrer"
+                className={`inline-block px-8 py-3 border-2 rounded-full font-retro text-sm uppercase tracking-widest transition-all hover:scale-105 ${themeConfig.border} ${themeConfig.text} ${themeConfig.shadow} hover:bg-white/10`}
+              >
+                View All Projects
+              </a>
+            </div>
           </div>
         </section>
 
