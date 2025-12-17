@@ -43,8 +43,8 @@ export const HologramProjectCard: React.FC<HologramProjectCardProps> = ({
             <div className={`absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 ${themeClasses.border} rounded-bl-lg z-20 opacity-80`}></div>
             <div className={`absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 ${themeClasses.border} rounded-br-lg z-20 opacity-80`}></div>
 
-            {/* Image Section */}
-            <div className="h-56 relative overflow-hidden border-b border-white/10 group-hover:border-white/30 transition-colors">
+            {/* Image Section - Clickable */}
+            <a href={link} target="_blank" rel="noreferrer" className="block h-56 relative overflow-hidden border-b border-white/10 group-hover:border-white/30 transition-colors cursor-pointer">
                 <img
                     src={imageSrc}
                     alt={title}
@@ -53,7 +53,7 @@ export const HologramProjectCard: React.FC<HologramProjectCardProps> = ({
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
                 {/* Color Overlay */}
                 <div className={`absolute inset-0 ${themeClasses.bg} opacity-10 mix-blend-overlay`}></div>
-            </div>
+            </a>
 
             {/* Content Section */}
             <div className="p-8 relative z-20 flex flex-col h-full bg-gradient-to-b from-transparent to-black/90">
