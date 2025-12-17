@@ -64,8 +64,11 @@ export const HologramProjectCard: React.FC<HologramProjectCardProps> = ({
                     <span className={`text-xs font-retro tracking-widest uppercase ${themeClasses.text} drop-shadow-[0_0_5px_currentColor]`}>{category}</span>
                 </div>
 
-                <h3 className="text-2xl md:text-3xl font-bold font-retro mb-4 text-white drop-shadow-md">
+                <h3 className="text-2xl md:text-3xl font-bold font-retro mb-4 text-white drop-shadow-md flex items-center gap-3">
                     {title}
+                    <a href={link} target="_blank" rel="noreferrer" className={`opacity-50 hover:opacity-100 transition-opacity ${themeClasses.text}`}>
+                        <ExternalLink size={24} />
+                    </a>
                 </h3>
 
                 <p className="text-sm font-mono text-gray-300 leading-relaxed mb-8">
@@ -76,7 +79,7 @@ export const HologramProjectCard: React.FC<HologramProjectCardProps> = ({
                     <a href={link} target="_blank" rel="noreferrer" className={`group/btn relative inline-flex items-center justify-center gap-2 w-full py-4 font-bold uppercase tracking-widest text-sm border-2 ${themeClasses.border} ${themeClasses.text} hover:bg-white/5 transition-all duration-300 overflow-hidden`}>
                         <span className="relative z-10 flex items-center gap-2">
                             <ExternalLink size={16} />
-                            INITIALIZE SYSTEM
+                            LAUNCH PROJECT
                         </span>
                         <div className={`absolute inset-0 ${themeClasses.bg} opacity-0 group-hover/btn:opacity-20 transition-opacity`}></div>
                         {/* Button Glitch Effect */}
