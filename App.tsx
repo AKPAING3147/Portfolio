@@ -21,7 +21,7 @@ interface ProjectShowcaseProps {
 
 const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ year, title, description, align, themeColor, icon: Icon, imageSrc, tags, link }) => {
   return (
-    <section className="min-h-[80vh] flex items-center justify-center relative z-10 px-4 py-20">
+    <section className="min-h-[80vh] flex items-center justify-center relative z-10 px-4 py-10">
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Empty column for spacing/Falling Cat visibility */}
         <div className={`${align === 'left' ? 'order-2 md:order-2' : 'order-2 md:order-1'} h-full pointer-events-none hidden md:block`} />
@@ -84,6 +84,12 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ year, title, descript
             {description}
           </p>
 
+          {link && (
+            <a href={link} target="_blank" rel="noreferrer" className={`mb-4 inline-flex items-center gap-2 px-6 py-2 border-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all hover:scale-105 hover:bg-white/10 ${themeColor} ${themeColor.replace('border-', 'text-')} relative z-10 group`}>
+              Launch Project <ExternalLink size={14} className="group-hover:translate-x-1 transition-transform" />
+            </a>
+          )}
+
           {/* Tags */}
           <div className="flex flex-wrap gap-2 relative z-10">
             {tags?.map((tag, i) => (
@@ -93,11 +99,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ year, title, descript
             ))}
           </div>
 
-          {link && (
-            <a href={link} target="_blank" rel="noreferrer" className={`mt-4 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider ${themeColor.replace('border-', 'text-')} hover:underline relative z-10`}>
-              Visit Link <ExternalLink size={14} />
-            </a>
-          )}
+
 
           {/* Large faded icon in background */}
           <Icon className={`absolute -bottom-10 -right-10 w-64 h-64 opacity-5 ${themeColor.replace('border-', 'text-')} transform -rotate-12`} />
@@ -223,16 +225,7 @@ const App: React.FC = () => {
           )}
         </AnimatePresence>
 
-        {/* --- Fixed Global Elements --- */}
-        {!loading && (
-          <FallingBoy
-            onPop={handleBalloonPop}
-            isAkatsuki={isAkatsuki}
-            isStarWars={isStarWars}
-            isRickAndMorty={isRickAndMorty}
-            isLoveTheme={isLoveTheme}
-          />
-        )}
+
 
         {/* Stars Background Layer (Fixed) */}
         <motion.div style={{ opacity: isStarWars || isRickAndMorty ? 1 : isLoveTheme ? 0.3 : scrollStarsOpacity }} className="fixed inset-0 pointer-events-none z-0">
@@ -288,14 +281,20 @@ const App: React.FC = () => {
         </div>
 
         {/* --- Section 1: Intro (The Fall Begins) --- */}
-        <section className="relative h-screen flex flex-col items-center justify-center pt-20 overflow-hidden z-10">
+        <section className="relative h-screen flex flex-col items-center justify-start pt-20 overflow-hidden z-10">
           <motion.div
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.5 }}
             className="z-10 text-center px-4"
           >
-            <div className={`inline-block mb-4 px-4 py-1 bg-black/40 border rounded-full ${isAkatsuki ? 'border-red-600' : isStarWars ? 'border-yellow-500' : isRickAndMorty ? 'border-green-500' : isLoveTheme ? 'border-pink-400 bg-white/30 text-pink-700 font-bold' : 'border-yellow-500'}`}>
+            <FallingBoy
+              isAkatsuki={isAkatsuki}
+              isStarWars={isStarWars}
+              isRickAndMorty={isRickAndMorty}
+              isLoveTheme={isLoveTheme}
+            />
+            <div className={`inline-block mb-4 mt-6 px-4 py-1 bg-black/40 border rounded-full ${isAkatsuki ? 'border-red-600' : isStarWars ? 'border-yellow-500' : isRickAndMorty ? 'border-green-500' : isLoveTheme ? 'border-pink-400 bg-white/30 text-pink-700 font-bold' : 'border-yellow-500'}`}>
               <p className={`font-retro text-xs md:text-sm ${isAkatsuki ? 'text-red-500' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-400' : isLoveTheme ? 'text-pink-600' : 'text-yellow-400'}`}>EST. 2002 • MANDALAY</p>
             </div>
             <h1 className={`text-4xl md:text-8xl font-retro text-transparent bg-clip-text drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] mb-4 leading-tight skew-x-[-5deg] 
@@ -384,7 +383,7 @@ const App: React.FC = () => {
         />
 
         {/* --- Section: Featured Projects (Hologram Update) --- */}
-        <section className={`min-h-screen flex items-center justify-center relative z-10 px-4 py-20 ${isLoveTheme ? 'bg-white/10' : 'bg-black/20'}`}>
+        <section className={`min-h-screen flex items-center justify-center relative z-10 px-4 py-10 ${isLoveTheme ? 'bg-white/10' : 'bg-black/20'}`}>
           <div className="max-w-6xl w-full">
             <div className="text-center mb-16">
               <h2 className={`text-3xl md:text-5xl font-retro mb-4 uppercase ${themeConfig.text} drop-shadow-[0_0_15px_currentColor]`}>
@@ -412,17 +411,6 @@ const App: React.FC = () => {
                 icon={School}
                 themeClasses={themeConfig}
               />
-            </div>
-
-            <div className="mt-16 text-center">
-              <a
-                href="https://github.com/AKPAING3147?tab=repositories"
-                target="_blank"
-                rel="noreferrer"
-                className={`inline-block px-8 py-3 border-2 rounded-full font-retro text-sm uppercase tracking-widest transition-all hover:scale-105 ${themeConfig.border} ${themeConfig.text} ${themeConfig.shadow} hover:bg-white/10`}
-              >
-                View All Projects
-              </a>
             </div>
           </div>
         </section>
