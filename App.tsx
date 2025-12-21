@@ -4,7 +4,7 @@ import { FallingBoy } from './components/FallingBoy';
 import { Preloader } from './components/Preloader';
 import { BackgroundAudio } from './components/BackgroundAudio';
 import { HologramProjectCard } from './components/HologramProjectCard';
-import { Code, Terminal, Zap, Cloud, Github, Linkedin, Database, Layout, GraduationCap, BookOpen, AlertTriangle, Globe, ExternalLink, School, Palette, Layers, Mail, Heart } from 'lucide-react';
+import { Code, Terminal, Zap, Cloud, Github, Linkedin, Database, Layout, GraduationCap, BookOpen, AlertTriangle, Globe, ExternalLink, School, Palette, Layers, Mail, Heart, Sparkles } from 'lucide-react';
 
 // Reusable Component for Timeline/Project Sections
 interface ProjectShowcaseProps {
@@ -399,6 +399,7 @@ const App: React.FC = () => {
                 description="A modern Inventory Management System built with Next.js, TypeScript, Prisma, and Neon. Features secure authentication, real-time tracking, and a sleek interface."
                 imageSrc="/image.png"
                 link="https://invoice-app-akp.vercel.app/"
+                githubLink="https://github.com/AKPAING3147"
                 icon={Layout}
                 themeClasses={themeConfig}
               />
@@ -408,7 +409,28 @@ const App: React.FC = () => {
                 description="The official learning platform for Inet College. Facilitating computer science education and student resources in Myanmar."
                 imageSrc="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop"
                 link="https://inet.edu.mm/"
+                githubLink="https://github.com/AKPAING3147"
                 icon={School}
+                themeClasses={themeConfig}
+              />
+              <HologramProjectCard
+                title="Baydin App"
+                category="Astrology & Lifestyle"
+                description="A traditional Burmese astrology application providing comprehensive fortune telling reports, daily horoscopes, and mystical insights."
+                imageSrc="/baydin-app.png"
+                link="https://baydin-app.vercel.app/"
+                githubLink="https://github.com/AKPAING3147/baydin-app"
+                icon={Sparkles}
+                themeClasses={themeConfig}
+              />
+              <HologramProjectCard
+                title="Tadau EPC"
+                category="Utility Management"
+                description="Digital billing and power usage tracking system for Tadau township. Streamlines electricity payments and provides real-time consumption data."
+                imageSrc="/tadau-epc.png"
+                link="https://tadau-epc.vercel.app/"
+                githubLink="https://github.com/AKPAING3147/tadau-epc"
+                icon={Zap}
                 themeClasses={themeConfig}
               />
             </div>

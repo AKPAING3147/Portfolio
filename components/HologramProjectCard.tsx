@@ -8,6 +8,7 @@ interface HologramProjectCardProps {
     description: string;
     imageSrc: string;
     link: string;
+    githubLink?: string;
     icon: LucideIcon;
     themeClasses: {
         border: string;
@@ -24,6 +25,7 @@ export const HologramProjectCard: React.FC<HologramProjectCardProps> = ({
     description,
     imageSrc,
     link,
+    githubLink,
     icon: Icon,
     themeClasses
 }) => {
@@ -75,16 +77,26 @@ export const HologramProjectCard: React.FC<HologramProjectCardProps> = ({
                     {description}
                 </p>
 
-                <div className="mt-auto">
-                    <a href={link} target="_blank" rel="noreferrer" className={`group/btn relative inline-flex items-center justify-center gap-2 w-full py-4 font-bold uppercase tracking-widest text-sm border-2 ${themeClasses.border} ${themeClasses.text} hover:bg-white/5 transition-all duration-300 overflow-hidden`}>
+                <div className="mt-6 grid grid-cols-2 gap-4">
+                    <a href={link} target="_blank" rel="noreferrer" className={`group/btn relative inline-flex items-center justify-center gap-2 w-full py-3 font-bold uppercase tracking-widest text-xs md:text-sm border-2 ${themeClasses.border} ${themeClasses.text} hover:bg-white/5 transition-all duration-300 overflow-hidden`}>
                         <span className="relative z-10 flex items-center gap-2">
                             <ExternalLink size={16} />
-                            LAUNCH PROJECT
+                            LAUNCH
                         </span>
                         <div className={`absolute inset-0 ${themeClasses.bg} opacity-0 group-hover/btn:opacity-20 transition-opacity`}></div>
-                        {/* Button Glitch Effect */}
                         <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover/btn:animate-[shimmer_1s_infinite]"></div>
                     </a>
+
+                    {githubLink && (
+                        <a href={githubLink} target="_blank" rel="noreferrer" className={`group/btn relative inline-flex items-center justify-center gap-2 w-full py-3 font-bold uppercase tracking-widest text-xs md:text-sm border-2 border-white/20 text-gray-300 hover:bg-white/5 transition-all duration-300 overflow-hidden`}>
+                            <span className="relative z-10 flex items-center gap-2">
+                                <span className="text-lg">
+                                    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-130.7-20.8-40.6-1.5-104 4.5-119.6 0 0 61.5-17 191 71.8 58.6-16.6 93.1-12.2 132.1-12.2 30.7 0 71.8 4.2 131.6 20.9 96.6-69.6 150.9-50.6 150.9-50.6 6.8 17.6 16.9 61.3 6.9 99.4 33.2 35.7 51.7 81.3 51.7 131.1 0 102.4-59.5 187.8-200.7 212.8 23.3 23 37.7 55.4 37.7 94.6v127.3c0 11.4 4 28.3 23.2 22.2 174.1-61.2 299-227.1 299-422.5 0-246.6-200.9-446.7-446.7-446.7z"></path></svg>
+                                </span>
+                                CODE
+                            </span>
+                        </a>
+                    )}
                 </div>
             </div>
         </motion.div>
