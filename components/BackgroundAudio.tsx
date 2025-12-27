@@ -23,6 +23,10 @@ const PLAYLIST = [
   {
     title: "Love Theme",
     src: "/Ladyfingers.mp3"
+  },
+  {
+    title: "Central Cee Theme",
+    src: "/CENTRAL CEE FT. LIL BABY - BAND4BAND (MUSIC VIDEO) [pDddlvCfTiw].mp3"
   }
 ];
 

@@ -7,9 +7,10 @@ interface FallingBoyProps {
   isStarWars?: boolean;
   isRickAndMorty?: boolean;
   isLoveTheme?: boolean;
+  isCentralCee?: boolean;
 }
 
-export const FallingBoy: React.FC<FallingBoyProps> = ({ isAkatsuki = false, isStarWars = false, isRickAndMorty = false, isLoveTheme = false }) => {
+export const FallingBoy: React.FC<FallingBoyProps> = ({ isAkatsuki = false, isStarWars = false, isRickAndMorty = false, isLoveTheme = false, isCentralCee = false }) => {
 
   return (
     <motion.div
@@ -36,7 +37,8 @@ export const FallingBoy: React.FC<FallingBoyProps> = ({ isAkatsuki = false, isSt
               ${isStarWars ? 'border-gray-300 shadow-[0_0_20px_rgba(34,255,0,0.4)] bg-black' : ''}
               ${isRickAndMorty ? 'border-green-500 shadow-[0_0_40px_rgba(34,197,94,0.6)] bg-black' : ''}
               ${isLoveTheme ? 'border-pink-400 shadow-[0_0_40px_rgba(236,72,153,0.6)] bg-pink-100' : ''}
-              ${!isRickAndMorty && !isAkatsuki && !isStarWars && !isLoveTheme ? 'border-white/90 shadow-[0_0_50px_rgba(0,255,255,0.4)]' : ''}
+              ${isCentralCee ? 'border-orange-500 shadow-[0_0_40px_rgba(249,115,22,0.6)] bg-black' : ''}
+              ${!isRickAndMorty && !isAkatsuki && !isStarWars && !isLoveTheme && !isCentralCee ? 'border-white/90 shadow-[0_0_50px_rgba(0,255,255,0.4)]' : ''}
             `}
       >
         <img
@@ -47,6 +49,7 @@ export const FallingBoy: React.FC<FallingBoyProps> = ({ isAkatsuki = false, isSt
                       ${isStarWars ? 'grayscale contrast-125 brightness-75' : ''}
                       ${isRickAndMorty ? 'hue-rotate-90 contrast-125' : ''}
                       ${isLoveTheme ? 'contrast-110' : ''}
+                      ${isCentralCee ? 'grayscale brightness-90 contrast-125' : ''}
                   `}
         />
 
@@ -55,7 +58,8 @@ export const FallingBoy: React.FC<FallingBoyProps> = ({ isAkatsuki = false, isSt
                   ${isStarWars ? 'bg-green-500/10 shadow-[inset_0_0_20px_rgba(0,255,0,0.3)]'
             : isRickAndMorty ? 'bg-green-400/10'
               : isLoveTheme ? 'bg-pink-500/10'
-                : 'bg-gradient-to-br from-white/20 to-transparent'}
+                : isCentralCee ? 'bg-orange-500/10'
+                  : 'bg-gradient-to-br from-white/20 to-transparent'}
               `}></div>
       </div>
     </motion.div>

@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { FallingBoy } from './components/FallingBoy';
 import { Preloader } from './components/Preloader';
 import { BackgroundAudio } from './components/BackgroundAudio';
 import { HologramProjectCard } from './components/HologramProjectCard';
+import { FallingLyrics } from './components/FallingLyrics';
 import { Code, Terminal, Zap, Cloud, Github, Linkedin, Database, Layout, GraduationCap, BookOpen, AlertTriangle, Globe, ExternalLink, School, Palette, Layers, Mail, Heart, Sparkles } from 'lucide-react';
 
 // Reusable Component for Timeline/Project Sections
@@ -113,6 +114,7 @@ const App: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const [currentSongIndex, setCurrentSongIndex] = useState(1);
+  const [isZenMode, setIsZenMode] = useState(false);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -122,14 +124,21 @@ const App: React.FC = () => {
   const isStarWars = currentSongIndex === 1;
   const isRickAndMorty = currentSongIndex === 2;
   const isLoveTheme = currentSongIndex === 3;
+  const isCentralCee = currentSongIndex === 4;
 
   const themeConfig = {
-    border: isAkatsuki ? 'border-red-600' : isStarWars ? 'border-yellow-500' : isRickAndMorty ? 'border-green-500' : isLoveTheme ? 'border-pink-400' : 'border-cyan-500',
-    shadow: isAkatsuki ? 'shadow-[0_0_30px_rgba(220,38,38,0.3)]' : isStarWars ? 'shadow-[0_0_30px_rgba(250,204,21,0.3)]' : isRickAndMorty ? 'shadow-[0_0_30px_rgba(74,222,128,0.3)]' : isLoveTheme ? 'shadow-[0_0_30px_rgba(244,63,94,0.3)]' : 'shadow-[0_0_30px_rgba(6,182,212,0.3)]',
-    text: isAkatsuki ? 'text-red-500' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-400' : isLoveTheme ? 'text-pink-500' : 'text-cyan-400',
-    icon: isAkatsuki ? 'text-red-500' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-400' : isLoveTheme ? 'text-pink-500' : 'text-cyan-400',
-    bg: isAkatsuki ? 'bg-red-500' : isStarWars ? 'bg-yellow-400' : isRickAndMorty ? 'bg-green-400' : isLoveTheme ? 'bg-pink-400' : 'bg-cyan-400'
+    // ... config ...
+    border: isAkatsuki ? 'border-red-600' : isStarWars ? 'border-yellow-500' : isRickAndMorty ? 'border-green-500' : isLoveTheme ? 'border-pink-400' : isCentralCee ? 'border-orange-500' : 'border-cyan-500',
+    shadow: isAkatsuki ? 'shadow-[0_0_30px_rgba(220,38,38,0.3)]' : isStarWars ? 'shadow-[0_0_30px_rgba(250,204,21,0.3)]' : isRickAndMorty ? 'shadow-[0_0_30px_rgba(74,222,128,0.3)]' : isLoveTheme ? 'shadow-[0_0_30px_rgba(244,63,94,0.3)]' : isCentralCee ? 'shadow-[0_0_30px_rgba(249,115,22,0.3)]' : 'shadow-[0_0_30px_rgba(6,182,212,0.3)]',
+    text: isAkatsuki ? 'text-red-500' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-400' : isLoveTheme ? 'text-pink-500' : isCentralCee ? 'text-orange-500' : 'text-cyan-400',
+    icon: isAkatsuki ? 'text-red-500' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-400' : isLoveTheme ? 'text-pink-500' : isCentralCee ? 'text-orange-500' : 'text-cyan-400',
+    bg: isAkatsuki ? 'bg-red-500' : isStarWars ? 'bg-yellow-400' : isRickAndMorty ? 'bg-green-400' : isLoveTheme ? 'bg-pink-400' : isCentralCee ? 'bg-orange-500' : 'bg-cyan-400'
   };
+
+  // Automatically Toggle Zen Mode based on Theme
+  useEffect(() => {
+    setIsZenMode(isCentralCee);
+  }, [isCentralCee]);
 
   const handleBalloonPop = () => {
     // Delay the scroll slightly to allow the pop animation to register
@@ -140,6 +149,8 @@ const App: React.FC = () => {
       });
     }, 600);
   };
+
+
 
   // Background Parallax & Transitions
   const skyY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
@@ -157,33 +168,33 @@ const App: React.FC = () => {
     {
       category: "Core Framework",
       icon: Code,
-      color: isAkatsuki ? "text-red-500" : isStarWars ? "text-yellow-400" : isRickAndMorty ? "text-green-400" : isLoveTheme ? "text-pink-400" : "text-cyan-400",
-      borderColor: isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-green-500" : isLoveTheme ? "border-pink-500" : "border-cyan-500",
-      shadow: isAkatsuki ? "shadow-[0_0_20px_rgba(220,38,38,0.3)]" : isStarWars ? "shadow-[0_0_20px_rgba(250,204,21,0.3)]" : isRickAndMorty ? "shadow-[0_0_20px_rgba(74,222,128,0.3)]" : isLoveTheme ? "shadow-[0_0_20px_rgba(236,72,153,0.3)]" : "shadow-[0_0_20px_rgba(34,211,238,0.3)]",
+      color: isAkatsuki ? "text-red-500" : isStarWars ? "text-yellow-400" : isRickAndMorty ? "text-green-400" : isLoveTheme ? "text-pink-400" : isCentralCee ? "text-orange-500" : "text-cyan-400",
+      borderColor: isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-green-500" : isLoveTheme ? "border-pink-500" : isCentralCee ? "border-orange-500" : "border-cyan-500",
+      shadow: isAkatsuki ? "shadow-[0_0_20px_rgba(220,38,38,0.3)]" : isStarWars ? "shadow-[0_0_20px_rgba(250,204,21,0.3)]" : isRickAndMorty ? "shadow-[0_0_20px_rgba(74,222,128,0.3)]" : isLoveTheme ? "shadow-[0_0_20px_rgba(236,72,153,0.3)]" : isCentralCee ? "shadow-[0_0_20px_rgba(249,115,22,0.3)]" : "shadow-[0_0_20px_rgba(34,211,238,0.3)]",
       items: ["Next.js (App Router)", "TypeScript"]
     },
     {
       category: "UI & Animation",
       icon: Palette,
-      color: isAkatsuki ? "text-red-500" : isStarWars ? "text-yellow-400" : isRickAndMorty ? "text-green-400" : isLoveTheme ? "text-rose-400" : "text-pink-400",
-      borderColor: isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-green-500" : isLoveTheme ? "border-rose-500" : "border-pink-500",
-      shadow: isAkatsuki ? "shadow-[0_0_20px_rgba(220,38,38,0.3)]" : isStarWars ? "shadow-[0_0_20px_rgba(250,204,21,0.3)]" : isRickAndMorty ? "shadow-[0_0_20px_rgba(74,222,128,0.3)]" : isLoveTheme ? "shadow-[0_0_20px_rgba(244,63,94,0.3)]" : "shadow-[0_0_20px_rgba(236,72,153,0.3)]",
+      color: isAkatsuki ? "text-red-500" : isStarWars ? "text-yellow-400" : isRickAndMorty ? "text-green-400" : isLoveTheme ? "text-rose-400" : isCentralCee ? "text-orange-400" : "text-pink-400",
+      borderColor: isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-green-500" : isLoveTheme ? "border-rose-500" : isCentralCee ? "border-orange-600" : "border-pink-500",
+      shadow: isAkatsuki ? "shadow-[0_0_20px_rgba(220,38,38,0.3)]" : isStarWars ? "shadow-[0_0_20px_rgba(250,204,21,0.3)]" : isRickAndMorty ? "shadow-[0_0_20px_rgba(74,222,128,0.3)]" : isLoveTheme ? "shadow-[0_0_20px_rgba(244,63,94,0.3)]" : isCentralCee ? "shadow-[0_0_20px_rgba(249,115,22,0.3)]" : "shadow-[0_0_20px_rgba(236,72,153,0.3)]",
       items: ["Tailwind CSS", "shadcn/ui", "Framer Motion"]
     },
     {
       category: "State Management",
       icon: Layers,
-      color: isAkatsuki ? "text-red-500" : isStarWars ? "text-yellow-400" : isRickAndMorty ? "text-cyan-400" : isLoveTheme ? "text-purple-400" : "text-yellow-400",
-      borderColor: isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-cyan-500" : isLoveTheme ? "border-purple-500" : "border-yellow-500",
-      shadow: isAkatsuki ? "shadow-[0_0_20px_rgba(220,38,38,0.3)]" : isStarWars ? "shadow-[0_0_20px_rgba(250,204,21,0.3)]" : isRickAndMorty ? "shadow-[0_0_20px_rgba(34,211,238,0.3)]" : isLoveTheme ? "shadow-[0_0_20px_rgba(168,85,247,0.3)]" : "shadow-[0_0_20px_rgba(250,204,21,0.3)]",
+      color: isAkatsuki ? "text-red-500" : isStarWars ? "text-yellow-400" : isRickAndMorty ? "text-cyan-400" : isLoveTheme ? "text-purple-400" : isCentralCee ? "text-amber-400" : "text-yellow-400",
+      borderColor: isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-cyan-500" : isLoveTheme ? "border-purple-500" : isCentralCee ? "border-amber-500" : "border-yellow-500",
+      shadow: isAkatsuki ? "shadow-[0_0_20px_rgba(220,38,38,0.3)]" : isStarWars ? "shadow-[0_0_20px_rgba(250,204,21,0.3)]" : isRickAndMorty ? "shadow-[0_0_20px_rgba(34,211,238,0.3)]" : isLoveTheme ? "shadow-[0_0_20px_rgba(168,85,247,0.3)]" : isCentralCee ? "shadow-[0_0_20px_rgba(245,158,11,0.3)]" : "shadow-[0_0_20px_rgba(250,204,21,0.3)]",
       items: ["Zustand"]
     },
     {
       category: "Backend & Data",
       icon: Database,
-      color: isAkatsuki ? "text-red-500" : isStarWars ? "text-yellow-400" : isRickAndMorty ? "text-lime-400" : isLoveTheme ? "text-red-400" : "text-green-400",
-      borderColor: isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-lime-500" : isLoveTheme ? "border-red-500" : "border-green-500",
-      shadow: isAkatsuki ? "shadow-[0_0_20px_rgba(220,38,38,0.3)]" : isStarWars ? "shadow-[0_0_20px_rgba(250,204,21,0.3)]" : isRickAndMorty ? "shadow-[0_0_20px_rgba(163,230,53,0.3)]" : isLoveTheme ? "shadow-[0_0_20px_rgba(239,68,68,0.3)]" : "shadow-[0_0_20px_rgba(34,197,94,0.3)]",
+      color: isAkatsuki ? "text-red-500" : isStarWars ? "text-yellow-400" : isRickAndMorty ? "text-lime-400" : isLoveTheme ? "text-red-400" : isCentralCee ? "text-orange-600" : "text-green-400",
+      borderColor: isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-lime-500" : isLoveTheme ? "border-red-500" : isCentralCee ? "border-orange-700" : "border-green-500",
+      shadow: isAkatsuki ? "shadow-[0_0_20px_rgba(220,38,38,0.3)]" : isStarWars ? "shadow-[0_0_20px_rgba(250,204,21,0.3)]" : isRickAndMorty ? "shadow-[0_0_20px_rgba(163,230,53,0.3)]" : isLoveTheme ? "shadow-[0_0_20px_rgba(239,68,68,0.3)]" : isCentralCee ? "shadow-[0_0_20px_rgba(234,88,12,0.3)]" : "shadow-[0_0_20px_rgba(34,197,94,0.3)]",
       items: ["Supabase (DB + Auth)", "Prisma"]
     }
   ];
@@ -199,7 +210,7 @@ const App: React.FC = () => {
 
       <motion.div
         ref={containerRef}
-        style={{ backgroundColor: isAkatsuki ? '#0a0a0a' : isStarWars ? '#000000' : isRickAndMorty ? '#101010' : isLoveTheme ? '#fce7f3' : standardBgColor }}
+        style={{ backgroundColor: isZenMode ? '#000000' : isAkatsuki ? '#0a0a0a' : isStarWars ? '#000000' : isRickAndMorty ? '#101010' : isLoveTheme ? '#fce7f3' : isCentralCee ? '#171717' : standardBgColor }}
         className="relative w-full text-white overflow-hidden transition-colors duration-1000"
       >
         {/* Akatsuki Red Sky Gradient Overlay */}
@@ -223,22 +234,51 @@ const App: React.FC = () => {
               className="absolute inset-0 z-0 bg-gradient-to-b from-sky-200 via-pink-200 to-white pointer-events-none opacity-80"
             />
           )}
+          {/* Central Cee Theme: 23 Background Icon */}
+          {isCentralCee && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{
+                opacity: [1, 0.9, 1],
+                scale: [1, 1.05, 1]
+              }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{
+                duration: 0.6, // Heavy beat pulse
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
+            >
+              <div className="relative flex items-center justify-center">
+                {/* Main Number */}
+                <span className="text-[20rem] md:text-[30rem] font-serif font-black text-orange-500/30 tracking-tighter drop-shadow-[0_0_50px_rgba(249,115,22,0.4)] select-none">
+                  23
+                </span>
+                {/* Optional: Subtle Ring or Glow */}
+                <div className="absolute w-[90%] h-[90%] border-4 border-orange-500/20 rounded-full blur-sm animate-pulse"></div>
+              </div>
+            </motion.div>
+          )}
+          {/* Central Cee Theme: Falling Lyrics Blackout */}
+          {isCentralCee && <FallingLyrics />}
         </AnimatePresence>
 
 
 
         {/* Stars Background Layer (Fixed) */}
-        <motion.div style={{ opacity: isStarWars || isRickAndMorty ? 1 : isLoveTheme ? 0.3 : scrollStarsOpacity }} className="fixed inset-0 pointer-events-none z-0">
+        <motion.div style={{ opacity: isZenMode ? 0 : isStarWars || isRickAndMorty ? 1 : isLoveTheme ? 0.3 : isCentralCee ? 0.2 : scrollStarsOpacity }} className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-1000">
           <div className={`absolute inset-0 opacity-40 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] 
                 ${isAkatsuki ? 'invert filter sepia saturate-200 hue-rotate-[-50deg]' : ''}
                 ${isStarWars ? 'opacity-90' : ''}
                 ${isRickAndMorty ? 'opacity-90 hue-rotate-90' : ''}
                 ${isLoveTheme ? 'invert opacity-20' : ''}
+                ${isCentralCee ? 'invert opacity-50' : ''}
             `}></div>
         </motion.div>
 
         {/* Floating Clouds Layer - Hide for Star Wars & RickAndMorty as they are space themes */}
-        {!isStarWars && !isRickAndMorty && (
+        {!isStarWars && !isRickAndMorty && !isZenMode && (
           <motion.div style={{ y: skyY }} className={`fixed inset-0 w-full h-[150vh] pointer-events-none z-0 ${isAkatsuki ? 'text-red-900/40' : isLoveTheme ? 'text-white' : 'text-white/10'}`}>
             <div className="absolute top-[5%] left-[5%] animate-pulse"><Cloud size={120} className={isAkatsuki ? "drop-shadow-[0_0_10px_red]" : isLoveTheme ? "text-white drop-shadow-md opacity-80" : ""} /></div>
             <div className="absolute top-[15%] right-[10%] animate-pulse delay-700"><Cloud size={180} className={isAkatsuki ? "drop-shadow-[0_0_15px_red]" : isLoveTheme ? "text-white drop-shadow-lg opacity-90" : ""} /></div>
@@ -268,14 +308,15 @@ const App: React.FC = () => {
         )}
 
         {/* Persistent Social Links */}
-        <div className="fixed bottom-4 left-4 z-50 flex gap-3">
-          <a href="https://github.com/AKPAING3147" target="_blank" rel="noreferrer" className={`p-2 bg-black/50 border rounded-full hover:bg-white hover:text-black transition-colors ${isAkatsuki ? 'border-red-600 text-red-500' : isStarWars ? 'border-yellow-500 text-yellow-400' : isRickAndMorty ? 'border-green-500 text-green-400' : isLoveTheme ? 'border-pink-500 text-pink-500 hover:text-pink-600' : 'border-white/20 text-white'}`}>
+        {/* Persistent Social Links */}
+        <div className="fixed bottom-4 left-4 z-50 flex gap-3 items-center">
+          <a href="https://github.com/AKPAING3147" target="_blank" rel="noreferrer" className={`p-2 bg-black/50 border rounded-full hover:bg-white hover:text-black transition-colors ${isAkatsuki ? 'border-red-600 text-red-500' : isStarWars ? 'border-yellow-500 text-yellow-400' : isRickAndMorty ? 'border-green-500 text-green-400' : isLoveTheme ? 'border-pink-500 text-pink-500 hover:text-pink-600' : isCentralCee ? 'border-orange-500 text-orange-500 hover:text-orange-600' : 'border-white/20 text-white'}`}>
             <Github size={20} />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className={`p-2 bg-black/50 border rounded-full hover:bg-white hover:text-black transition-colors ${isAkatsuki ? 'border-red-600 text-red-500' : isStarWars ? 'border-yellow-500 text-yellow-400' : isRickAndMorty ? 'border-green-500 text-green-400' : isLoveTheme ? 'border-pink-500 text-pink-500 hover:text-pink-600' : 'border-white/20 text-white'}`}>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className={`p-2 bg-black/50 border rounded-full hover:bg-white hover:text-black transition-colors ${isAkatsuki ? 'border-red-600 text-red-500' : isStarWars ? 'border-yellow-500 text-yellow-400' : isRickAndMorty ? 'border-green-500 text-green-400' : isLoveTheme ? 'border-pink-500 text-pink-500 hover:text-pink-600' : isCentralCee ? 'border-orange-500 text-orange-500 hover:text-orange-600' : 'border-white/20 text-white'}`}>
             <Linkedin size={20} />
           </a>
-          <a href="mailto:aungp5979@gmail.com" className={`p-2 bg-black/50 border rounded-full hover:bg-white hover:text-black transition-colors ${isAkatsuki ? 'border-red-600 text-red-500' : isStarWars ? 'border-yellow-500 text-yellow-400' : isRickAndMorty ? 'border-green-500 text-green-400' : isLoveTheme ? 'border-pink-500 text-pink-500 hover:text-pink-600' : 'border-white/20 text-white'}`}>
+          <a href="mailto:aungp5979@gmail.com" className={`p-2 bg-black/50 border rounded-full hover:bg-white hover:text-black transition-colors ${isAkatsuki ? 'border-red-600 text-red-500' : isStarWars ? 'border-yellow-500 text-yellow-400' : isRickAndMorty ? 'border-green-500 text-green-400' : isLoveTheme ? 'border-pink-500 text-pink-500 hover:text-pink-600' : isCentralCee ? 'border-orange-500 text-orange-500 hover:text-orange-600' : 'border-white/20 text-white'}`}>
             <Mail size={20} />
           </a>
         </div>
@@ -284,7 +325,7 @@ const App: React.FC = () => {
         <section className="relative h-screen flex flex-col items-center justify-start pt-20 overflow-hidden z-10">
           <motion.div
             initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            animate={{ y: 0, opacity: isZenMode ? 0 : 1 }}
             transition={{ duration: 1.2, delay: 0.5 }}
             className="z-10 text-center px-4"
           >
@@ -293,230 +334,241 @@ const App: React.FC = () => {
               isStarWars={isStarWars}
               isRickAndMorty={isRickAndMorty}
               isLoveTheme={isLoveTheme}
+              isCentralCee={isCentralCee}
             />
-            <div className={`inline-block mb-4 mt-6 px-4 py-1 bg-black/40 border rounded-full ${isAkatsuki ? 'border-red-600' : isStarWars ? 'border-yellow-500' : isRickAndMorty ? 'border-green-500' : isLoveTheme ? 'border-pink-400 bg-white/30 text-pink-700 font-bold' : 'border-yellow-500'}`}>
-              <p className={`font-retro text-xs md:text-sm ${isAkatsuki ? 'text-red-500' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-400' : isLoveTheme ? 'text-pink-600' : 'text-yellow-400'}`}>EST. 2002 • MANDALAY</p>
-            </div>
-            <h1 className={`text-4xl md:text-8xl font-retro text-transparent bg-clip-text drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] mb-4 leading-tight skew-x-[-5deg] 
-                  ${isAkatsuki ? 'bg-gradient-to-b from-red-500 via-red-800 to-black drop-shadow-[4px_4px_0_#450a0a]'
-                : isStarWars ? 'bg-transparent text-yellow-400 stroke-yellow-400 drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]'
-                  : isRickAndMorty ? 'bg-gradient-to-b from-green-400 via-green-600 to-black drop-shadow-[4px_4px_0_#14532d]'
-                    : isLoveTheme ? 'bg-gradient-to-b from-pink-400 via-rose-500 to-purple-600 drop-shadow-[4px_4px_0_rgba(255,255,255,0.5)]'
-                      : 'bg-gradient-to-b from-cyan-300 via-blue-500 to-purple-600'}`}>
-              AKP<br />PORTFOLIO
-            </h1>
-            <div className={`inline-block bg-black/40 backdrop-blur border p-4 rounded-lg transform -rotate-2 ${isAkatsuki ? 'border-red-600' : isStarWars ? 'border-yellow-500' : isRickAndMorty ? 'border-green-500 shadow-[0_0_15px_#22c55e]' : isLoveTheme ? 'border-pink-400 bg-white/20 text-pink-800 shadow-[0_0_15px_pink]' : 'border-cyan-500/30'}`}>
-              <p className={`font-mono text-xl md:text-2xl ${isAkatsuki ? 'text-red-400' : isStarWars ? 'text-yellow-200' : isRickAndMorty ? 'text-green-200' : isLoveTheme ? 'text-pink-700 font-bold' : 'text-cyan-200'}`}>
-                <span className={isAkatsuki ? 'text-red-600' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-500' : isLoveTheme ? 'text-rose-500' : 'text-pink-500'}>&lt;</span>Next.js Developer <span className={isAkatsuki ? 'text-red-600' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-500' : isLoveTheme ? 'text-rose-500' : 'text-pink-500'}>/&gt;</span>
-              </p>
-              <p className={`text-sm mt-2 font-retro ${isAkatsuki ? 'text-red-800' : isStarWars ? 'text-yellow-600' : isRickAndMorty ? 'text-green-600' : isLoveTheme ? 'text-pink-600' : 'text-gray-400'}`}>MANDALAY TO THAILAND • THE JOURNEY</p>
-            </div>
+            <motion.div
+              animate={{ opacity: isZenMode ? 0 : 1, filter: isZenMode ? 'blur(10px)' : 'blur(0px)' }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className={`inline-block mb-4 mt-6 px-4 py-1 bg-black/40 border rounded-full ${isAkatsuki ? 'border-red-600' : isStarWars ? 'border-yellow-500' : isRickAndMorty ? 'border-green-500' : isLoveTheme ? 'border-pink-400 bg-white/30 text-pink-700 font-bold' : isCentralCee ? 'border-orange-500' : 'border-yellow-500'}`}>
+                <p className={`font-retro text-xs md:text-sm ${isAkatsuki ? 'text-red-500' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-400' : isLoveTheme ? 'text-pink-600' : isCentralCee ? 'text-orange-500' : 'text-yellow-400'}`}>EST. 2002 • MANDALAY</p>
+              </div>
+              <h1 className={`text-4xl md:text-8xl font-retro text-transparent bg-clip-text drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] mb-4 leading-tight skew-x-[-5deg] 
+                    ${isAkatsuki ? 'bg-gradient-to-b from-red-500 via-red-800 to-black drop-shadow-[4px_4px_0_#450a0a]'
+                  : isStarWars ? 'bg-transparent text-yellow-400 stroke-yellow-400 drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]'
+                    : isRickAndMorty ? 'bg-gradient-to-b from-green-400 via-green-600 to-black drop-shadow-[4px_4px_0_#14532d]'
+                      : isLoveTheme ? 'bg-gradient-to-b from-pink-400 via-rose-500 to-purple-600 drop-shadow-[4px_4px_0_rgba(255,255,255,0.5)]'
+                        : isCentralCee ? 'bg-gradient-to-b from-orange-400 via-orange-600 to-black drop-shadow-[4px_4px_0_#c2410c]'
+                          : 'bg-gradient-to-b from-cyan-300 via-blue-500 to-purple-600'}`}>
+                AKP<br />PORTFOLIO
+              </h1>
+              <div className={`inline-block bg-black/40 backdrop-blur border p-4 rounded-lg transform -rotate-2 ${isAkatsuki ? 'border-red-600' : isStarWars ? 'border-yellow-500' : isRickAndMorty ? 'border-green-500 shadow-[0_0_15px_#22c55e]' : isLoveTheme ? 'border-pink-400 bg-white/20 text-pink-800 shadow-[0_0_15px_pink]' : isCentralCee ? 'border-orange-500 shadow-[0_0_15px_#f97316]' : 'border-cyan-500/30'}`}>
+                <p className={`font-mono text-xl md:text-2xl ${isAkatsuki ? 'text-red-400' : isStarWars ? 'text-yellow-200' : isRickAndMorty ? 'text-green-200' : isLoveTheme ? 'text-pink-700 font-bold' : isCentralCee ? 'text-orange-200' : 'text-cyan-200'}`}>
+                  <span className={isAkatsuki ? 'text-red-600' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-500' : isLoveTheme ? 'text-rose-500' : isCentralCee ? 'text-orange-500' : 'text-pink-500'}>&lt;</span>Next.js Developer <span className={isAkatsuki ? 'text-red-600' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-500' : isLoveTheme ? 'text-rose-500' : isCentralCee ? 'text-orange-500' : 'text-pink-500'}>/&gt;</span>
+                </p>
+                <p className={`text-sm mt-2 font-retro ${isAkatsuki ? 'text-red-800' : isStarWars ? 'text-yellow-600' : isRickAndMorty ? 'text-green-600' : isLoveTheme ? 'text-pink-600' : 'text-gray-400'}`}>MANDALAY TO THAILAND • THE JOURNEY</p>
+              </div>
 
-            <div className="mt-20 animate-bounce">
-              <div className={`w-1 h-16 bg-gradient-to-b from-transparent mx-auto rounded-full opacity-50 ${isAkatsuki ? 'to-red-600' : isStarWars ? 'to-yellow-400' : isRickAndMorty ? 'to-green-500' : isLoveTheme ? 'to-rose-500' : 'to-cyan-400'}`}></div>
-              <p className={`text-xs font-retro mt-2 ${isAkatsuki ? 'text-red-500' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-400' : isLoveTheme ? 'text-rose-500' : 'text-cyan-400'}`}>INITIALIZE TIMELINE</p>
-            </div>
+              <div className="mt-20 animate-bounce">
+                <div className={`w-1 h-16 bg-gradient-to-b from-transparent mx-auto rounded-full opacity-50 ${isAkatsuki ? 'to-red-600' : isStarWars ? 'to-yellow-400' : isRickAndMorty ? 'to-green-500' : isLoveTheme ? 'to-rose-500' : isCentralCee ? 'to-orange-500' : 'to-cyan-400'}`}></div>
+                <p className={`text-xs font-retro mt-2 ${isAkatsuki ? 'text-red-500' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-400' : isLoveTheme ? 'text-rose-500' : isCentralCee ? 'text-orange-500' : 'text-cyan-400'}`}>INITIALIZE TIMELINE</p>
+              </div>
+            </motion.div>
           </motion.div>
         </section>
 
         {/* --- Timeline Sections --- */}
+        <motion.div animate={{ opacity: isZenMode ? 0 : 1, filter: isZenMode ? 'blur(10px)' : 'blur(0px)' }} transition={{ duration: 0.5 }}>
 
-        {/* 2019 - Matriculation */}
-        <ProjectShowcase
-          year="2019"
-          title="The Foundation"
-          description="Successfully passed the Matriculation Exam in Myanmar, setting the stage for a journey into technology and engineering."
-          align="left"
-          themeColor={isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-green-500" : isLoveTheme ? "border-pink-400" : "border-cyan-400"}
-          icon={BookOpen}
-          tags={['Education', 'Milestone', 'Myanmar']}
-          imageSrc="https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=800&auto=format&fit=crop"
-        />
+          {/* 2019 - Matriculation */}
+          <ProjectShowcase
+            year="2019"
+            title="The Foundation"
+            description="Successfully passed the Matriculation Exam in Myanmar, setting the stage for a journey into technology and engineering."
+            align="left"
+            themeColor={isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-green-500" : isLoveTheme ? "border-pink-400" : isCentralCee ? "border-orange-500" : "border-cyan-400"}
+            icon={BookOpen}
+            tags={['Education', 'Milestone', 'Myanmar']}
+            imageSrc="https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=800&auto=format&fit=crop"
+          />
 
-        {/* 2020 - Inet College */}
-        <ProjectShowcase
-          year="2020"
-          title="Computer Science"
-          description="Enrolled in Inet College to study Computer Science. Drove deep into algorithms, programming structures, and web development fundamentals."
-          align="right"
-          themeColor={isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-cyan-500" : isLoveTheme ? "border-rose-400" : "border-green-400"}
-          icon={Code}
-          tags={['Inet College', 'Coding', 'Web Dev']}
-          imageSrc="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?q=80&w=800&auto=format&fit=crop"
-          link="https://inet.edu.mm"
-        />
+          {/* 2020 - Inet College */}
+          <ProjectShowcase
+            year="2020"
+            title="Computer Science"
+            description="Enrolled in Inet College to study Computer Science. Drove deep into algorithms, programming structures, and web development fundamentals."
+            align="right"
+            themeColor={isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-cyan-500" : isLoveTheme ? "border-rose-400" : isCentralCee ? "border-orange-400" : "border-green-400"}
+            icon={Code}
+            tags={['Inet College', 'Coding', 'Web Dev']}
+            imageSrc="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?q=80&w=800&auto=format&fit=crop"
+            link="https://inet.edu.mm"
+          />
 
-        {/* 2021 - The Coup */}
-        <ProjectShowcase
-          year="2021"
-          title="Resilience"
-          description="A challenging year. The coup happened in Myanmar. Despite the political turmoil and internet disruptions, I persisted in my studies and remained focused on my goals."
-          align="left"
-          themeColor={isAkatsuki ? "border-red-800" : isRickAndMorty ? "border-red-900" : isLoveTheme ? "border-red-400" : "border-red-500"}
-          icon={AlertTriangle}
-          tags={['Adversity', 'Persistence', 'Myanmar']}
-          imageSrc="https://images.unsplash.com/photo-1623945238202-b2a8c3d0cb81?q=80&w=800&auto=format&fit=crop"
-        />
+          {/* 2021 - The Coup */}
+          <ProjectShowcase
+            year="2021"
+            title="Resilience"
+            description="A challenging year. The coup happened in Myanmar. Despite the political turmoil and internet disruptions, I persisted in my studies and remained focused on my goals."
+            align="left"
+            themeColor={isAkatsuki ? "border-red-800" : isRickAndMorty ? "border-red-900" : isLoveTheme ? "border-red-400" : isCentralCee ? "border-red-700" : "border-red-500"}
+            icon={AlertTriangle}
+            tags={['Adversity', 'Persistence', 'Myanmar']}
+            imageSrc="https://images.unsplash.com/photo-1623945238202-b2a8c3d0cb81?q=80&w=800&auto=format&fit=crop"
+          />
 
-        {/* 2024 - Graduation */}
-        <ProjectShowcase
-          year="2024"
-          title="UCLan Graduate"
-          description="Achieved a major milestone: Graduated with a Degree in Computer Science from the University of Central Lancashire (UCLan)."
-          align="right"
-          themeColor={isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-purple-500" : isLoveTheme ? "border-purple-400" : "border-purple-500"}
-          icon={GraduationCap}
-          tags={['BSc Hons', 'UCLan', 'Graduation']}
-          imageSrc="https://images.unsplash.com/photo-1627556704290-2b1f5853ff78?q=80&w=800&auto=format&fit=crop"
-        />
+          {/* 2024 - Graduation */}
+          <ProjectShowcase
+            year="2024"
+            title="UCLan Graduate"
+            description="Achieved a major milestone: Graduated with a Degree in Computer Science from the University of Central Lancashire (UCLan)."
+            align="right"
+            themeColor={isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-purple-500" : isLoveTheme ? "border-purple-400" : isCentralCee ? "border-purple-600" : "border-purple-500"}
+            icon={GraduationCap}
+            tags={['BSc Hons', 'UCLan', 'Graduation']}
+            imageSrc="https://images.unsplash.com/photo-1627556704290-2b1f5853ff78?q=80&w=800&auto=format&fit=crop"
+          />
 
-        {/* 2025 - AIT Thailand */}
-        <ProjectShowcase
-          year="2025"
-          title="Next Chapter: KBU"
-          description="Currently pursuing advanced studies at (KBU) in Thailand. Expanding knowledge in AI, global tech trends, and research."
-          align="left"
-          themeColor={isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-blue-500" : isLoveTheme ? "border-sky-400" : "border-orange-500"}
-          icon={Globe}
-          tags={['KBU Thailand', 'Masters', 'Research']}
-          imageSrc="https://images.unsplash.com/photo-1555217851-6141535bd771?q=80&w=800&auto=format&fit=crop"
-        />
+          {/* 2025 - AIT Thailand */}
+          <ProjectShowcase
+            year="2025"
+            title="Next Chapter: KBU"
+            description="Currently pursuing advanced studies at (KBU) in Thailand. Expanding knowledge in AI, global tech trends, and research."
+            align="left"
+            themeColor={isAkatsuki ? "border-red-600" : isStarWars ? "border-yellow-500" : isRickAndMorty ? "border-blue-500" : isLoveTheme ? "border-sky-400" : isCentralCee ? "border-orange-500" : "border-orange-500"}
+            icon={Globe}
+            tags={['KBU Thailand', 'Masters', 'Research']}
+            imageSrc="https://images.unsplash.com/photo-1555217851-6141535bd771?q=80&w=800&auto=format&fit=crop"
+          />
 
-        {/* --- Section: Featured Projects (Hologram Update) --- */}
-        <section className={`min-h-screen flex items-center justify-center relative z-10 px-4 py-10 ${isLoveTheme ? 'bg-white/10' : 'bg-black/20'}`}>
-          <div className="max-w-6xl w-full">
-            <div className="text-center mb-16">
-              <h2 className={`text-3xl md:text-5xl font-retro mb-4 uppercase ${themeConfig.text} drop-shadow-[0_0_15px_currentColor]`}>
-                Project Archive
-              </h2>
-              <div className={`w-24 h-1 mx-auto rounded-full ${isAkatsuki ? 'bg-red-600' : isStarWars ? 'bg-yellow-400' : isRickAndMorty ? 'bg-green-500' : isLoveTheme ? 'bg-pink-500' : 'bg-cyan-400'}`}></div>
+          {/* --- Section: Featured Projects (Hologram Update) --- */}
+          <section className={`min-h-screen flex items-center justify-center relative z-10 px-4 py-10 ${isLoveTheme ? 'bg-white/10' : 'bg-black/20'}`}>
+            <div className="max-w-6xl w-full">
+              <div className="text-center mb-16">
+                <h2 className={`text-3xl md:text-5xl font-retro mb-4 uppercase ${themeConfig.text} drop-shadow-[0_0_15px_currentColor]`}>
+                  Project Archive
+                </h2>
+                <div className={`w-24 h-1 mx-auto rounded-full ${isAkatsuki ? 'bg-red-600' : isStarWars ? 'bg-yellow-400' : isRickAndMorty ? 'bg-green-500' : isLoveTheme ? 'bg-pink-500' : isCentralCee ? 'bg-orange-500' : 'bg-cyan-400'}`}></div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <HologramProjectCard
+                  title="Inventory System"
+                  category="Web Application"
+                  description="A modern Inventory Management System built with Next.js, TypeScript, Prisma, and Neon. Features secure authentication, real-time tracking, and a sleek interface."
+                  imageSrc="/image.png"
+                  link="https://invoice-app-akp.vercel.app/"
+                  githubLink="https://github.com/AKPAING3147"
+                  icon={Layout}
+                  themeClasses={themeConfig}
+                />
+                <HologramProjectCard
+                  title="Inet College"
+                  category="Educational Platform"
+                  description="The official learning platform for Inet College. Facilitating computer science education and student resources in Myanmar."
+                  imageSrc="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop"
+                  link="https://inet.edu.mm/"
+                  githubLink="https://github.com/AKPAING3147"
+                  icon={School}
+                  themeClasses={themeConfig}
+                />
+                <HologramProjectCard
+                  title="Baydin App"
+                  category="Astrology & Lifestyle"
+                  description="A traditional Burmese astrology application providing comprehensive fortune telling reports, daily horoscopes, and mystical insights."
+                  imageSrc="/baydin-app.png"
+                  link="https://baydin-app.vercel.app/"
+                  githubLink="https://github.com/AKPAING3147/baydin-app"
+                  icon={Sparkles}
+                  themeClasses={themeConfig}
+                />
+                <HologramProjectCard
+                  title="Tadau EPC"
+                  category="Utility Management"
+                  description="Digital billing and power usage tracking system for Tadau township. Streamlines electricity payments and provides real-time consumption data."
+                  imageSrc="/tadau-epc.png"
+                  link="https://tadau-epc.vercel.app/"
+                  githubLink="https://github.com/AKPAING3147/tadau-epc"
+                  icon={Zap}
+                  themeClasses={themeConfig}
+                />
+              </div>
             </div>
+          </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <HologramProjectCard
-                title="Inventory System"
-                category="Web Application"
-                description="A modern Inventory Management System built with Next.js, TypeScript, Prisma, and Neon. Features secure authentication, real-time tracking, and a sleek interface."
-                imageSrc="/image.png"
-                link="https://invoice-app-akp.vercel.app/"
-                githubLink="https://github.com/AKPAING3147"
-                icon={Layout}
-                themeClasses={themeConfig}
-              />
-              <HologramProjectCard
-                title="Inet College"
-                category="Educational Platform"
-                description="The official learning platform for Inet College. Facilitating computer science education and student resources in Myanmar."
-                imageSrc="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop"
-                link="https://inet.edu.mm/"
-                githubLink="https://github.com/AKPAING3147"
-                icon={School}
-                themeClasses={themeConfig}
-              />
-              <HologramProjectCard
-                title="Baydin App"
-                category="Astrology & Lifestyle"
-                description="A traditional Burmese astrology application providing comprehensive fortune telling reports, daily horoscopes, and mystical insights."
-                imageSrc="/baydin-app.png"
-                link="https://baydin-app.vercel.app/"
-                githubLink="https://github.com/AKPAING3147/baydin-app"
-                icon={Sparkles}
-                themeClasses={themeConfig}
-              />
-              <HologramProjectCard
-                title="Tadau EPC"
-                category="Utility Management"
-                description="Digital billing and power usage tracking system for Tadau township. Streamlines electricity payments and provides real-time consumption data."
-                imageSrc="/tadau-epc.png"
-                link="https://tadau-epc.vercel.app/"
-                githubLink="https://github.com/AKPAING3147/tadau-epc"
-                icon={Zap}
-                themeClasses={themeConfig}
-              />
-            </div>
-          </div>
-        </section>
+          {/* --- Section: Tech Stack --- */}
+          <section className="relative min-h-screen flex items-center justify-center p-4 z-10">
+            {/* Background Grid specific to this section */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.1)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] pointer-events-none"></div>
 
-        {/* --- Section: Tech Stack --- */}
-        <section className="relative min-h-screen flex items-center justify-center p-4 z-10">
-          {/* Background Grid specific to this section */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.1)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] pointer-events-none"></div>
-
-          <div className="w-full max-w-6xl relative">
-            <div className="text-center mb-16">
-              <h2 className={`text-4xl md:text-7xl font-retro text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(168,85,247,0.6)] mb-4 
+            <div className="w-full max-w-6xl relative">
+              <div className="text-center mb-16">
+                <h2 className={`text-4xl md:text-7xl font-retro text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(168,85,247,0.6)] mb-4 
                       ${isAkatsuki ? 'bg-gradient-to-r from-red-600 to-orange-500'
-                  : isStarWars ? 'bg-gradient-to-r from-yellow-300 to-yellow-600'
-                    : isRickAndMorty ? 'bg-gradient-to-r from-green-400 to-cyan-500'
-                      : isLoveTheme ? 'bg-gradient-to-r from-pink-400 to-rose-600 drop-shadow-[0_0_15px_pink]'
-                        : 'bg-gradient-to-r from-cyan-400 to-purple-500'}`}>
-                TECH STACK
-              </h2>
-            </div>
+                    : isStarWars ? 'bg-gradient-to-r from-yellow-300 to-yellow-600'
+                      : isRickAndMorty ? 'bg-gradient-to-r from-green-400 to-cyan-500'
+                        : isLoveTheme ? 'bg-gradient-to-r from-pink-400 to-rose-600 drop-shadow-[0_0_15px_pink]'
+                          : isCentralCee ? 'bg-gradient-to-r from-orange-400 to-orange-600 drop-shadow-[0_0_15px_orange]'
+                            : 'bg-gradient-to-r from-cyan-400 to-purple-500'}`}>
+                  TECH STACK
+                </h2>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {techStack.map((stack, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`bg-black/80 border-2 ${stack.borderColor} rounded-lg p-6 hover:-translate-y-2 transition-transform duration-300 relative group overflow-hidden ${isLoveTheme ? 'bg-white/80' : ''}`}
-                >
-                  {/* Glowing Background */}
-                  <div className={`absolute inset-0 bg-gradient-to-b ${stack.borderColor.replace('border-', 'from-')}/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {techStack.map((stack, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`bg-black/80 border-2 ${stack.borderColor} rounded-lg p-6 hover:-translate-y-2 transition-transform duration-300 relative group overflow-hidden ${isLoveTheme ? 'bg-white/80' : ''}`}
+                  >
+                    {/* Glowing Background */}
+                    <div className={`absolute inset-0 bg-gradient-to-b ${stack.borderColor.replace('border-', 'from-')}/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity`}></div>
 
-                  {/* Header */}
-                  <div className="flex items-center gap-3 mb-6 relative z-10">
-                    <div className={`p-3 rounded border ${stack.borderColor} ${stack.shadow} ${isLoveTheme ? 'bg-white' : 'bg-black'}`}>
-                      <stack.icon className={stack.color} size={24} />
+                    {/* Header */}
+                    <div className="flex items-center gap-3 mb-6 relative z-10">
+                      <div className={`p-3 rounded border ${stack.borderColor} ${stack.shadow} ${isLoveTheme ? 'bg-white' : 'bg-black'}`}>
+                        <stack.icon className={stack.color} size={24} />
+                      </div>
+                      <h3 className={`font-retro text-sm ${stack.color} leading-tight`}>{stack.category.split(' ').map((word, i) => <span key={i} className="block">{word}</span>)}</h3>
                     </div>
-                    <h3 className={`font-retro text-sm ${stack.color} leading-tight`}>{stack.category.split(' ').map((word, i) => <span key={i} className="block">{word}</span>)}</h3>
-                  </div>
 
-                  {/* List */}
-                  <ul className="space-y-3 relative z-10">
-                    {stack.items.map((item, i) => (
-                      <li key={i} className={`flex items-start gap-2 text-sm font-mono transition-colors ${isLoveTheme ? 'text-gray-600 group-hover:text-black' : 'text-gray-300 group-hover:text-white'}`}>
-                        <Zap size={14} className={`mt-1 flex-shrink-0 ${stack.color}`} />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                    {/* List */}
+                    <ul className="space-y-3 relative z-10">
+                      {stack.items.map((item, i) => (
+                        <li key={i} className={`flex items-start gap-2 text-sm font-mono transition-colors ${isLoveTheme ? 'text-gray-600 group-hover:text-black' : 'text-gray-300 group-hover:text-white'}`}>
+                          <Zap size={14} className={`mt-1 flex-shrink-0 ${stack.color}`} />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
 
-                  {/* Decorative scan line */}
-                  <div className="absolute top-0 left-0 w-full h-[1px] bg-white/20 animate-[scan_3s_linear_infinite] opacity-0 group-hover:opacity-50 pointer-events-none"></div>
-                </motion.div>
-              ))}
+                    {/* Decorative scan line */}
+                    <div className="absolute top-0 left-0 w-full h-[1px] bg-white/20 animate-[scan_3s_linear_infinite] opacity-0 group-hover:opacity-50 pointer-events-none"></div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* --- Outro: Contact --- */}
-        <section className="relative h-[80vh] flex flex-col items-center justify-end pb-32 overflow-hidden z-10">
+          {/* --- Outro: Contact --- */}
+          <section className="relative h-[80vh] flex flex-col items-center justify-end pb-32 overflow-hidden z-10">
 
-          {/* Synthwave Sun / Star Wars Sun */}
-          <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-t opacity-20 blur-3xl rounded-full pointer-events-none 
+            {/* Synthwave Sun / Star Wars Sun */}
+            <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-t opacity-20 blur-3xl rounded-full pointer-events-none 
               ${isAkatsuki ? 'from-red-600 to-transparent'
-              : isStarWars ? 'from-blue-600 to-transparent'
-                : isRickAndMorty ? 'from-green-500 to-transparent'
-                  : isLoveTheme ? 'from-pink-400 to-transparent'
-                    : 'from-cyan-500 to-transparent'}`}></div>
+                : isStarWars ? 'from-blue-600 to-transparent'
+                  : isRickAndMorty ? 'from-green-500 to-transparent'
+                    : isLoveTheme ? 'from-pink-400 to-transparent'
+                      : isCentralCee ? 'from-orange-500 to-transparent'
+                        : 'from-cyan-500 to-transparent'}`}></div>
 
-          <div className={`absolute bottom-32 w-48 h-48 md:w-80 md:h-80 rounded-full bg-gradient-to-t flex items-end justify-center overflow-hidden shadow-[0_0_50px_rgba(34,211,238,0.5)] 
+            <div className={`absolute bottom-32 w-48 h-48 md:w-80 md:h-80 rounded-full bg-gradient-to-t flex items-end justify-center overflow-hidden shadow-[0_0_50px_rgba(34,211,238,0.5)] 
               ${isAkatsuki ? 'from-red-900 to-red-600 shadow-[0_0_50px_red]'
-              : isStarWars ? 'from-blue-900 to-blue-500 shadow-[0_0_50px_blue] rounded-none rotate-45 border-4 border-blue-400'
-                : isRickAndMorty ? 'from-green-900 to-green-500 shadow-[0_0_50px_lime] animate-pulse'
-                  : isLoveTheme ? 'from-rose-400 to-pink-200 shadow-[0_0_50px_pink]'
-                    : 'from-purple-600 to-cyan-400'}`}>
-            {/* Sun Lines */}
-            <div className="w-full h-full bg-[repeating-linear-gradient(black,black_4px,transparent_4px,transparent_14px)] opacity-40"></div>
-          </div>
+                : isStarWars ? 'from-blue-900 to-blue-500 shadow-[0_0_50px_blue] rounded-none rotate-45 border-4 border-blue-400'
+                  : isRickAndMorty ? 'from-green-900 to-green-500 shadow-[0_0_50px_lime] animate-pulse'
+                    : isLoveTheme ? 'from-rose-400 to-pink-200 shadow-[0_0_50px_pink]'
+                      : isCentralCee ? 'from-orange-800 to-orange-500 shadow-[0_0_50px_orange] border-4 border-orange-400'
+                        : 'from-purple-600 to-cyan-400'}`}>
+              {/* Sun Lines */}
+              <div className="w-full h-full bg-[repeating-linear-gradient(black,black_4px,transparent_4px,transparent_14px)] opacity-40"></div>
+            </div>
 
-          {/* Grid Floor */}
-          <div className="absolute bottom-0 w-full h-[40vh] bg-[linear-gradient(to_bottom,transparent_0%,rgba(168,85,247,0.3)_100%)] perspective-grid z-0"></div>
-          <style>{`
+            {/* Grid Floor */}
+            <div className="absolute bottom-0 w-full h-[40vh] bg-[linear-gradient(to_bottom,transparent_0%,rgba(168,85,247,0.3)_100%)] perspective-grid z-0"></div>
+            <style>{`
               .perspective-grid {
                   background-image: 
                       linear-gradient(0deg, transparent 24%, rgba(168, 85, 247, .5) 25%, rgba(168, 85, 247, .5) 26%, transparent 27%, transparent 74%, rgba(168, 85, 247, .5) 75%, rgba(168, 85, 247, .5) 76%, transparent 77%, transparent),
@@ -527,41 +579,46 @@ const App: React.FC = () => {
               }
           `}</style>
 
-          <div className={`z-10 text-center space-y-6 relative bg-black/60 backdrop-blur-sm p-8 rounded-xl border-t max-w-lg mx-auto mb-10 
+            <div className={`z-10 text-center space-y-6 relative bg-black/60 backdrop-blur-sm p-8 rounded-xl border-t max-w-lg mx-auto mb-10 
               ${isAkatsuki ? 'border-red-600'
-              : isStarWars ? 'border-yellow-500'
-                : isRickAndMorty ? 'border-green-500'
-                  : isLoveTheme ? 'border-pink-400 bg-white/30 text-black'
-                    : 'border-cyan-500/50'}`}>
-            <Terminal className={`w-12 h-12 mx-auto animate-pulse ${isAkatsuki ? 'text-red-500' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-400' : isLoveTheme ? 'text-pink-600' : 'text-cyan-400'}`} />
-            <h2 className={`text-3xl font-hand ${isLoveTheme ? 'text-pink-900' : 'text-white'}`}>Let's Connect</h2>
+                : isStarWars ? 'border-yellow-500'
+                  : isRickAndMorty ? 'border-green-500'
+                    : isLoveTheme ? 'border-pink-400 bg-white/30 text-black'
+                      : isCentralCee ? 'border-orange-500 bg-black/80'
+                        : 'border-cyan-500/50'}`}>
+              <Terminal className={`w-12 h-12 mx-auto animate-pulse ${isAkatsuki ? 'text-red-500' : isStarWars ? 'text-yellow-400' : isRickAndMorty ? 'text-green-400' : isLoveTheme ? 'text-pink-600' : isCentralCee ? 'text-orange-500' : 'text-cyan-400'}`} />
+              <h2 className={`text-3xl font-hand ${isLoveTheme ? 'text-pink-900' : 'text-white'}`}>Let's Connect</h2>
 
-            <div className={`py-2 px-4 bg-white/5 rounded border border-white/10 font-mono selection:text-black select-all 
+              <div className={`py-2 px-4 bg-white/5 rounded border border-white/10 font-mono selection:text-black select-all 
                   ${isAkatsuki ? 'text-red-300 selection:bg-red-500'
-                : isStarWars ? 'text-yellow-200 selection:bg-yellow-500'
-                  : isRickAndMorty ? 'text-green-200 selection:bg-green-500'
-                    : isLoveTheme ? 'text-pink-800 selection:bg-pink-300 bg-white/50 border-pink-300'
-                      : 'text-cyan-200 selection:bg-cyan-500'}`}>
-              aungp5979@gmail.com
-            </div>
+                  : isStarWars ? 'text-yellow-200 selection:bg-yellow-500'
+                    : isRickAndMorty ? 'text-green-200 selection:bg-green-500'
+                      : isLoveTheme ? 'text-pink-800 selection:bg-pink-300 bg-white/50 border-pink-300'
+                        : isCentralCee ? 'text-orange-200 selection:bg-orange-500'
+                          : 'text-cyan-200 selection:bg-cyan-500'}`}>
+                aungp5979@gmail.com
+              </div>
 
-            <a href="mailto:aungp5979@gmail.com" className={`inline-block group relative px-8 py-3 bg-transparent border-2 text-sm uppercase tracking-widest rounded transition-all overflow-hidden 
+              <a href="mailto:aungp5979@gmail.com" className={`inline-block group relative px-8 py-3 bg-transparent border-2 text-sm uppercase tracking-widest rounded transition-all overflow-hidden 
                   ${isAkatsuki ? 'border-red-600 text-red-500 hover:bg-red-600 hover:text-white'
-                : isStarWars ? 'border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-black'
-                  : isRickAndMorty ? 'border-green-500 text-green-400 hover:bg-green-500 hover:text-black'
-                    : isLoveTheme ? 'border-pink-500 text-pink-600 hover:bg-pink-500 hover:text-white'
-                      : 'border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-black'}`}>
-              <span className="relative z-10">Send Email</span>
-              <div className={`absolute inset-0 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left 
+                  : isStarWars ? 'border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-black'
+                    : isRickAndMorty ? 'border-green-500 text-green-400 hover:bg-green-500 hover:text-black'
+                      : isLoveTheme ? 'border-pink-500 text-pink-600 hover:bg-pink-500 hover:text-white'
+                        : isCentralCee ? 'border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-black'
+                          : 'border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-black'}`}>
+                <span className="relative z-10">Send Email</span>
+                <div className={`absolute inset-0 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left 
                       ${isAkatsuki ? 'bg-red-600'
-                  : isStarWars ? 'bg-yellow-500'
-                    : isRickAndMorty ? 'bg-green-500'
-                      : isLoveTheme ? 'bg-pink-500'
-                        : 'bg-cyan-500'}`}></div>
-            </a>
-          </div>
-        </section>
+                    : isStarWars ? 'bg-yellow-500'
+                      : isRickAndMorty ? 'bg-green-500'
+                        : isLoveTheme ? 'bg-pink-500'
+                          : isCentralCee ? 'bg-orange-500'
+                            : 'bg-cyan-500'}`}></div>
+              </a>
+            </div>
+          </section>
 
+        </motion.div>
       </motion.div>
     </>
   );
