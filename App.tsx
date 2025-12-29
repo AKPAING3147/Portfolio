@@ -164,6 +164,18 @@ const App: React.FC = () => {
     ["#0f172a", "#1e1b4b", "#312e81", "#4c1d95", "#0f172a"]
   );
 
+  // Tech Stack Icon Mapping for each technology
+  const techIcons: { [key: string]: React.ElementType } = {
+    "Next.js (App Router)": Terminal,
+    "TypeScript": Code,
+    "Tailwind CSS": Palette,
+    "shadcn/ui": Layers,
+    "Framer Motion": Sparkles,
+    "Zustand": Database,
+    "Supabase (DB + Auth)": Cloud,
+    "Prisma": Database
+  };
+
   const techStack = [
     {
       category: "Core Framework",
@@ -277,35 +289,24 @@ const App: React.FC = () => {
             `}></div>
         </motion.div>
 
-        {/* Floating Clouds Layer - Hide for Star Wars & RickAndMorty as they are space themes */}
-        {!isStarWars && !isRickAndMorty && !isZenMode && (
-          <motion.div style={{ y: skyY }} className={`fixed inset-0 w-full h-[150vh] pointer-events-none z-0 ${isAkatsuki ? 'text-red-900/40' : isLoveTheme ? 'text-white' : 'text-white/10'}`}>
-            <div className="absolute top-[5%] left-[5%] animate-pulse"><Cloud size={120} className={isAkatsuki ? "drop-shadow-[0_0_10px_red]" : isLoveTheme ? "text-white drop-shadow-md opacity-80" : ""} /></div>
-            <div className="absolute top-[15%] right-[10%] animate-pulse delay-700"><Cloud size={180} className={isAkatsuki ? "drop-shadow-[0_0_15px_red]" : isLoveTheme ? "text-white drop-shadow-lg opacity-90" : ""} /></div>
-            <div className="absolute top-[35%] left-[15%] opacity-50"><Cloud size={100} className={isLoveTheme ? "text-pink-100" : ""} /></div>
-            <div className="absolute top-[55%] right-[25%] opacity-50"><Cloud size={140} className={isAkatsuki ? "drop-shadow-[0_0_10px_darkred]" : isLoveTheme ? "text-white" : ""} /></div>
-            <div className="absolute top-[75%] left-[5%] opacity-50"><Cloud size={160} /></div>
-            <div className="absolute top-[90%] right-[15%] opacity-50"><Cloud size={120} /></div>
-
-            {/* Love Theme: Floating Hearts */}
-            {isLoveTheme && (
-              <>
-                <div className="absolute top-[20%] left-[20%] text-pink-500/50 animate-bounce">
-                  <Heart fill="pink" size={32} />
-                </div>
-                <div className="absolute top-[40%] right-[10%] text-red-400/40 animate-pulse delay-500">
-                  <Heart fill="#f87171" size={48} />
-                </div>
-                <div className="absolute top-[60%] right-[30%] text-rose-500/50 animate-bounce delay-1000">
-                  <Heart fill="#f43f5e" size={24} />
-                </div>
-                <div className="absolute top-[80%] left-[40%] text-pink-300/60 animate-bounce delay-700">
-                  <Heart fill="#fbcfe8" size={36} />
-                </div>
-              </>
-            )}
+        {/* Love Theme: Floating Hearts */}
+        {isLoveTheme && !isZenMode && (
+          <motion.div style={{ y: skyY }} className="fixed inset-0 w-full h-[150vh] pointer-events-none z-0">
+            <div className="absolute top-[20%] left-[20%] text-pink-500/50 animate-bounce">
+              <Heart fill="pink" size={32} />
+            </div>
+            <div className="absolute top-[40%] right-[10%] text-red-400/40 animate-pulse delay-500">
+              <Heart fill="#f87171" size={48} />
+            </div>
+            <div className="absolute top-[60%] right-[30%] text-rose-500/50 animate-bounce delay-1000">
+              <Heart fill="#f43f5e" size={24} />
+            </div>
+            <div className="absolute top-[80%] left-[40%] text-pink-300/60 animate-bounce delay-700">
+              <Heart fill="#fbcfe8" size={36} />
+            </div>
           </motion.div>
         )}
+
 
         {/* Persistent Social Links */}
         {/* Persistent Social Links */}
@@ -443,6 +444,17 @@ const App: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <HologramProjectCard
+                  title="MGY OFFSET"
+                  category="E-Commerce Platform"
+                  description="A modern full-stack e-commerce platform for wedding invitations and cloth printing. Features AI-powered template generation with Google Gemini, custom design editor, secure payment processing, and comprehensive admin dashboard."
+                  imageSrc="/mgy-logo.png"
+                  link="https://mgy-lake.vercel.app/"
+                  githubLink="https://github.com/AKPAING3147"
+                  icon={Palette}
+                  techStack={["Next.js 16", "TypeScript", "PostgreSQL", "Prisma", "NextAuth", "Google Gemini AI", "Tailwind CSS", "Framer Motion"]}
+                  themeClasses={themeConfig}
+                />
+                <HologramProjectCard
                   title="Inventory System"
                   category="Web Application"
                   description="A modern Inventory Management System built with Next.js, TypeScript, Prisma, and Neon. Features secure authentication, real-time tracking, and a sleek interface."
@@ -450,6 +462,7 @@ const App: React.FC = () => {
                   link="https://invoice-app-akp.vercel.app/"
                   githubLink="https://github.com/AKPAING3147"
                   icon={Layout}
+                  techStack={["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS", "NextAuth"]}
                   themeClasses={themeConfig}
                 />
                 <HologramProjectCard
@@ -460,26 +473,18 @@ const App: React.FC = () => {
                   link="https://inet.edu.mm/"
                   githubLink="https://github.com/AKPAING3147"
                   icon={School}
+                  techStack={["React", "JavaScript", "Node.js", "Express", "MongoDB"]}
                   themeClasses={themeConfig}
                 />
                 <HologramProjectCard
-                  title="Baydin App"
-                  category="Astrology & Lifestyle"
-                  description="A traditional Burmese astrology application providing comprehensive fortune telling reports, daily horoscopes, and mystical insights."
-                  imageSrc="/baydin-app.png"
-                  link="https://baydin-app.vercel.app/"
-                  githubLink="https://github.com/AKPAING3147/baydin-app"
-                  icon={Sparkles}
-                  themeClasses={themeConfig}
-                />
-                <HologramProjectCard
-                  title="Tadau EPC"
-                  category="Utility Management"
-                  description="Digital billing and power usage tracking system for Tadau township. Streamlines electricity payments and provides real-time consumption data."
-                  imageSrc="/tadau-epc.png"
-                  link="https://tadau-epc.vercel.app/"
-                  githubLink="https://github.com/AKPAING3147/tadau-epc"
-                  icon={Zap}
+                  title="Telegram Movie Bot"
+                  category="Bot Application"
+                  description="A powerful Telegram bot built with Next.js that allows users to search for movies using the TMDB API and share them directly to a Telegram channel with rich formatting."
+                  imageSrc="/telebot.png"
+                  link="https://telebot-woad.vercel.app/"
+                  githubLink="https://github.com/AKPAING3147"
+                  icon={Terminal}
+                  techStack={["Next.js 14", "Telegram Bot API", "TMDB API", "TypeScript", "Webhook", "Vercel"]}
                   themeClasses={themeConfig}
                 />
               </div>
@@ -527,12 +532,17 @@ const App: React.FC = () => {
 
                     {/* List */}
                     <ul className="space-y-3 relative z-10">
-                      {stack.items.map((item, i) => (
-                        <li key={i} className={`flex items-start gap-2 text-sm font-mono transition-colors ${isLoveTheme ? 'text-gray-600 group-hover:text-black' : 'text-gray-300 group-hover:text-white'}`}>
-                          <Zap size={14} className={`mt-1 flex-shrink-0 ${stack.color}`} />
-                          <span>{item}</span>
-                        </li>
-                      ))}
+                      {stack.items.map((item, i) => {
+                        const TechIcon = techIcons[item] || Zap;
+                        return (
+                          <li key={i} className={`flex items-center gap-3 text-sm font-mono transition-all duration-300 ${isLoveTheme ? 'text-gray-600 group-hover:text-black' : 'text-gray-300 group-hover:text-white'}`}>
+                            <div className={`p-1.5 rounded-md border ${stack.borderColor} ${isLoveTheme ? 'bg-white/50' : 'bg-white/5'} group-hover:scale-110 transition-transform`}>
+                              <TechIcon size={16} className={`${stack.color}`} />
+                            </div>
+                            <span className="group-hover:translate-x-1 transition-transform">{item}</span>
+                          </li>
+                        );
+                      })}
                     </ul>
 
                     {/* Decorative scan line */}

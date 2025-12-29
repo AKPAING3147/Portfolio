@@ -10,6 +10,7 @@ interface HologramProjectCardProps {
     link: string;
     githubLink?: string;
     icon: LucideIcon;
+    techStack?: string[];
     themeClasses: {
         border: string;
         shadow: string;
@@ -27,6 +28,7 @@ export const HologramProjectCard: React.FC<HologramProjectCardProps> = ({
     link,
     githubLink,
     icon: Icon,
+    techStack,
     themeClasses
 }) => {
     return (
@@ -73,9 +75,26 @@ export const HologramProjectCard: React.FC<HologramProjectCardProps> = ({
                     </a>
                 </h3>
 
-                <p className="text-sm font-mono text-gray-300 leading-relaxed mb-8">
+                <p className="text-sm font-mono text-gray-300 leading-relaxed mb-4">
                     {description}
                 </p>
+
+                {/* Tech Stack */}
+                {techStack && techStack.length > 0 && (
+                    <div className="mb-6">
+                        <h4 className={`text-xs font-retro uppercase tracking-wider mb-2 ${themeClasses.text}`}>Tech Stack</h4>
+                        <div className="flex flex-wrap gap-2">
+                            {techStack.map((tech, index) => (
+                                <span
+                                    key={index}
+                                    className={`text-xs font-mono px-2.5 py-1 rounded border ${themeClasses.border} bg-black/50 text-gray-200 hover:bg-white/10 transition-colors`}
+                                >
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                )}
 
                 <div className="mt-6 grid grid-cols-2 gap-4">
                     <a href={link} target="_blank" rel="noreferrer" className={`group/btn relative inline-flex items-center justify-center gap-2 w-full py-3 font-bold uppercase tracking-widest text-xs md:text-sm border-2 ${themeClasses.border} ${themeClasses.text} hover:bg-white/5 transition-all duration-300 overflow-hidden`}>
