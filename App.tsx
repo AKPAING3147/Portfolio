@@ -5,6 +5,7 @@ import { Preloader } from './components/Preloader';
 import { BackgroundAudio } from './components/BackgroundAudio';
 import { HologramProjectCard } from './components/HologramProjectCard';
 import { FallingLyrics } from './components/FallingLyrics';
+import { UFOWithMom } from './components/UFOWithMom';
 import { Code, Terminal, Zap, Cloud, Github, Linkedin, Database, Layout, GraduationCap, BookOpen, AlertTriangle, Globe, ExternalLink, School, Palette, Layers, Mail, Heart, Sparkles } from 'lucide-react';
 
 // Reusable Component for Timeline/Project Sections
@@ -324,6 +325,15 @@ const App: React.FC = () => {
 
         {/* --- Section 1: Intro (The Fall Begins) --- */}
         <section className="relative h-screen flex flex-col items-center justify-start pt-20 overflow-hidden z-10">
+          {/* UFO Easter Egg */}
+          <UFOWithMom
+            isAkatsuki={isAkatsuki}
+            isStarWars={isStarWars}
+            isRickAndMorty={isRickAndMorty}
+            isLoveTheme={isLoveTheme}
+            isCentralCee={isCentralCee}
+          />
+
           <motion.div
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: isZenMode ? 0 : 1 }}
@@ -625,6 +635,11 @@ const App: React.FC = () => {
                           : isCentralCee ? 'bg-orange-500'
                             : 'bg-cyan-500'}`}></div>
               </a>
+
+              {/* Easter Egg */}
+              <p className={`mt-6 text-xs font-hand opacity-30 hover:opacity-100 transition-opacity duration-500 ${isLoveTheme ? 'text-pink-600' : 'text-white'}`}>
+                Hi Mom ❤️
+              </p>
             </div>
           </section>
 
