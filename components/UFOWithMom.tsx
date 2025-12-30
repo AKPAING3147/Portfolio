@@ -60,7 +60,7 @@ export const UFOWithMom: React.FC<UFOWithMomProps> = ({
                 setIsComplete(true);
             }}
             style={{
-                top: '15%',
+                top: '5%',
                 left: '0'
             }}
         >
@@ -76,12 +76,12 @@ export const UFOWithMom: React.FC<UFOWithMomProps> = ({
                     delay: 2,
                     ease: "easeOut"
                 }}
-                className="absolute right-28 top-1/2 -translate-y-1/2 whitespace-nowrap font-hand pointer-events-none"
+                className="absolute right-20 top-1/2 -translate-y-1/2 whitespace-nowrap font-hand pointer-events-none"
                 style={{
                     color: isLoveTheme ? '#ec4899' : '#fff',
-                    fontSize: '1.5rem',
-                    textShadow: `0 0 20px ${glowColor}, 0 0 40px ${glowColor}, 0 0 60px ${glowColor}`,
-                    filter: 'blur(0.5px)',
+                    fontSize: '1rem',
+                    textShadow: `0 0 15px ${glowColor}, 0 0 30px ${glowColor}, 0 0 45px ${glowColor}`,
+                    filter: 'blur(0.3px)',
                     fontWeight: 'bold'
                 }}
             >
@@ -104,30 +104,30 @@ export const UFOWithMom: React.FC<UFOWithMomProps> = ({
                 >
                     {/* Glass Dome */}
                     <div
-                        className="w-12 h-12 rounded-full mx-auto relative"
+                        className="w-8 h-8 rounded-full mx-auto relative"
                         style={{
                             background: `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), ${ufoColor}40)`,
-                            border: `2px solid ${ufoColor}`,
-                            boxShadow: `0 0 20px ${glowColor}, inset 0 0 10px rgba(255,255,255,0.3)`
+                            border: `1.5px solid ${ufoColor}`,
+                            boxShadow: `0 0 15px ${glowColor}, inset 0 0 8px rgba(255,255,255,0.3)`
                         }}
                     >
                         {/* Alien inside */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                            <div className="w-4 h-5 bg-green-400 rounded-full relative">
-                                <div className="absolute w-1.5 h-1.5 bg-black rounded-full top-1 left-0.5"></div>
-                                <div className="absolute w-1.5 h-1.5 bg-black rounded-full top-1 right-0.5"></div>
+                            <div className="w-3 h-3.5 bg-green-400 rounded-full relative">
+                                <div className="absolute w-1 h-1 bg-black rounded-full top-0.5 left-0.5"></div>
+                                <div className="absolute w-1 h-1 bg-black rounded-full top-0.5 right-0.5"></div>
                             </div>
                         </div>
                     </div>
 
                     {/* UFO Base/Disc */}
                     <div
-                        className="w-24 h-6 relative -mt-2"
+                        className="w-16 h-4 relative -mt-1.5"
                         style={{
                             background: `linear-gradient(to bottom, ${ufoColor}, ${ufoColor}99)`,
                             borderRadius: '50%',
-                            border: `2px solid ${ufoColor}`,
-                            boxShadow: `0 0 30px ${glowColor}, 0 5px 15px rgba(0,0,0,0.5)`
+                            border: `1.5px solid ${ufoColor}`,
+                            boxShadow: `0 0 20px ${glowColor}, 0 3px 10px rgba(0,0,0,0.5)`
                         }}
                     >
                         {/* Lights on UFO */}
@@ -139,8 +139,8 @@ export const UFOWithMom: React.FC<UFOWithMomProps> = ({
                                 duration: 0.5,
                                 repeat: Infinity
                             }}
-                            className="absolute bottom-0 left-1/4 w-2 h-2 bg-yellow-300 rounded-full"
-                            style={{ boxShadow: '0 0 10px yellow' }}
+                            className="absolute bottom-0 left-1/4 w-1.5 h-1.5 bg-yellow-300 rounded-full"
+                            style={{ boxShadow: '0 0 8px yellow' }}
                         />
                         <motion.div
                             animate={{
@@ -150,8 +150,8 @@ export const UFOWithMom: React.FC<UFOWithMomProps> = ({
                                 duration: 0.5,
                                 repeat: Infinity
                             }}
-                            className="absolute bottom-0 left-1/2 w-2 h-2 bg-blue-300 rounded-full transform -translate-x-1/2"
-                            style={{ boxShadow: '0 0 10px cyan' }}
+                            className="absolute bottom-0 left-1/2 w-1.5 h-1.5 bg-blue-300 rounded-full transform -translate-x-1/2"
+                            style={{ boxShadow: '0 0 8px cyan' }}
                         />
                         <motion.div
                             animate={{
@@ -161,8 +161,8 @@ export const UFOWithMom: React.FC<UFOWithMomProps> = ({
                                 duration: 0.5,
                                 repeat: Infinity
                             }}
-                            className="absolute bottom-0 right-1/4 w-2 h-2 bg-pink-300 rounded-full"
-                            style={{ boxShadow: '0 0 10px pink' }}
+                            className="absolute bottom-0 right-1/4 w-1.5 h-1.5 bg-pink-300 rounded-full"
+                            style={{ boxShadow: '0 0 8px pink' }}
                         />
                     </div>
 
@@ -179,17 +179,17 @@ export const UFOWithMom: React.FC<UFOWithMomProps> = ({
                         }}
                         className="absolute left-1/2 -translate-x-1/2 top-full"
                         style={{
-                            width: '2px',
-                            height: '60px',
+                            width: '1.5px',
+                            height: '40px',
                             background: `linear-gradient(to bottom, ${ufoColor}, transparent)`,
-                            boxShadow: `0 0 10px ${glowColor}`
+                            boxShadow: `0 0 8px ${glowColor}`
                         }}
                     />
 
                     {/* String attachment point on UFO */}
                     <div
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-gray-600 rounded-full border border-gray-400"
-                        style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-600 rounded-full border border-gray-400"
+                        style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.5)' }}
                     />
                 </motion.div>
             </div>
